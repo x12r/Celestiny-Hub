@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✧･ﾟ: ✧･ﾟ: Modding Celestiny :･ﾟ✧:･ﾟ✧</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/W7aH0ES.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #0e0e0e, #181818);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .intro h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 1rem;
+      color: #ccc;
+    }
+
+    .credit {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 1rem;
+    }
+
+    .intro a {
+      background-color: #7c4dff;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      box-shadow: 0 0 10px #7c4dff;
+    }
+
+    .intro a:hover {
+      background-color: #512da8;
+      transform: scale(1.05);
+    }
+
+    .main {
+      display: none;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .feedback-box {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+    }
+
+    .feedback-box input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      margin-right: 0.5rem;
+    }
+
+    .feedback-box button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #7c4dff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1001;
+      color: white;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #1f1f1f;
+      transition: 0.4s ease;
+      padding-top: 4rem;
+      z-index: 1000;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #333;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: #333;
+    }
+
+    .content {
+      margin-left: 0;
+      padding: 2rem;
+      transition: margin-left 0.4s ease;
+    }
+
+    .content.shift {
+      margin-left: 260px;
+    }
+
+    .category {
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .category h2 {
+      color: #bb86fc;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #7c4dff;
+      padding-bottom: 0.5rem;
+    }
+
+    .page {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .option {
+      background-color: #2a2a2a;
+      padding: 1rem;
+      width: calc(33.333% - 1rem);
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000000;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-align: center;
+      position: relative;
+    }
+
+    .option:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #bb86fc;
+    }
+
+    .option img {
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+      margin-top: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .option:hover img {
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro" id="intro">
+    <h1>✧･ﾟ: ✧･ﾟ: Modding Celestiny :･ﾟ✧:･ﾟ✧</h1>
+    <p>Welcome to the official modding site for Celestiny. Access DLLs, modded APKs, cloud backend info, PlayFab & Photon data, tools and more.</p>
+    <div class="credit">- website by x12</div>
+    <p>Join our Discord: <strong>[your discord link]</strong></p>
+    <a href="#" onclick="startSite()">Continue</a>
+  </div>
+
+  <div class="main" id="main">
+    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+    <div class="sidebar" id="sidebar">
+      <a href="#dlls">DLLs</a>
+      <a href="#modded">Modded APKs</a>
+      <a href="#playfab">PlayFab Info</a>
+      <a href="#photon">Photon Info</a>
+      <a href="#tools">Tools</a>
+      <a href="#boosters">Booster Perks</a>
+    </div>
+    <header>
+      Celestiny Mod Hub
+      <div class="feedback-box">
+        <input type="text" id="feedbackInput" placeholder="Send feedback">
+        <button onclick="sendFeedback()">Send</button>
+      </div>
+    </header>
+    <div class="content" id="content">
+      <div class="category" id="dlls">
+        <h2>DLLs</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+
+      <div class="category" id="modded">
+        <h2>Modded APKs</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+
+      <div class="category" id="playfab">
+        <h2>PlayFab Info</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+
+      <div class="category" id="photon">
+        <h2>Photon Info</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+
+      <div class="category" id="tools">
+        <h2>Tools</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+
+      <div class="category" id="boosters">
+        <h2>Booster Perks</h2>
+        <div class="page">
+          <div class="option">Placeholder 1<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 2<img src="https://via.placeholder.com/150"></div>
+          <div class="option">Placeholder 3<img src="https://via.placeholder.com/150"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('content').classList.toggle('shift');
+    }
+
+    function startSite() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+    }
+
+    function sendFeedback() {
+      const input = document.getElementById('feedbackInput').value;
+      const webhookBody = {
+        embeds: [
+          {
+            description: `**Request from website**\n${input}\n\nWebsite by -x12`,
+            color: 0x9b59b6
+          }
+        ]
+      };
+
+      fetch('https://discord.com/api/webhooks/1361276164252897383/4r7v7gHQQP4A0pVhSTG_csxOhILpktmFIBEomol4bIP6BnDpmn4F65h992sH6zhX2lEL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookBody)
+      }).then(res => {
+        alert('Sent!');
+        document.getElementById('feedbackInput').value = '';
+      });
+    }
+  </script>
+</body>
+</html>
